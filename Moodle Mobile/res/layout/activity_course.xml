@@ -1,0 +1,20 @@
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/Layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_margin="5dp" 
+        android:background="@drawable/images"
+        >
+
+        <TextView
+            android:id="@+id/Courses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge" 
+            android:scrollbars="vertical"
+            android:typeface="serif"
+            />
+
+    </LinearLayout>

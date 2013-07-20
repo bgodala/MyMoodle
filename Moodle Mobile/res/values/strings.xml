@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">My Moodle</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_list">ListActivity</string>
+    <string name="title_activity_main_screen">MainScreen</string>
+    <string name="title_activity_user_info">UserInfo</string>
+    <string name="title_activity_participants_courses">ParticipantsCourses</string>
+    <string name="title_activity_participant">Participant</string>
+    <string name="title_activity_course">Course</string>
+    <string name="title_activity_content">Content</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_send">Send</string>
+    <string name="title_activity_participant_list">ParticipantList</string>
+    <string name="title_activity_participant_couurse_list">ParticipantCouurseList</string>
+    <string name="server">Moodle Server</string>
+    <string name="service">Web Service Name</string>
+    <string name="url">http://moodle.iith.ac.in/moodle</string>
+    <string name="webservice">moodle_mobile</string>
+    <string name="title_activity_choice_menu">ChoiceMenu</string>
+    <string name="title_activity_assignments">Assignments</string>
+    <string name="title_activity_assignment_content">AssignmentContent</string>
+    <string name="course">Course Details</string>
+    <string name="assignemtns">Assignments</string>
+    <string name="forums">Forums</string>
+    <string name="message">Send Message</string>
+    <string name="files">Files</string>
+    <string name="url_resources">URL Resources</string>
+    <string name="service_name">Moodle Assignment Notification Service</string>
+    <string name="title_activity_assignment_webview">AssignmentWebview</string>
+    <string name="title_activity_files">Files</string>
+    <string name="title_activity_course_contents">CourseContents</string>
+    <string name="title_activity_url_list">UrlList</string>
+    <string name="title_activity_forums_topics">ForumsTopics</string>
+    <string name="title_activity_forum_discussion">ForumDiscussion</string>
+    <string name="title_activity_json_test">JsonTest</string>
+    <string name="title_activity_file_download">FileDownload</string>
+
+</resources>

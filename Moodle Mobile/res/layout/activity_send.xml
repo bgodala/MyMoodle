@@ -1,0 +1,28 @@
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/images"
+        android:gravity="left|top"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="124dp"
+            android:layout_gravity="top|left"
+            android:ems="10"
+            android:gravity="center_vertical|left"
+            android:lines="4" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/send"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send" />
+
+    </LinearLayout>

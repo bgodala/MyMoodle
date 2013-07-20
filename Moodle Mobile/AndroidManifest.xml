@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.moodletest"
+    android:installLocation="preferExternal"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="11" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/moodle_icon"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Holo.Light" >
+        <activity
+            android:name="com.moodletest.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.moodletest.ListActivity"
+            android:label="@string/title_activity_list"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.MainScreen"
+            android:label="@string/title_activity_main_screen"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.UserInfo"
+            android:label="@string/title_activity_user_info"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.ParticipantsCourses"
+            android:label="@string/title_activity_participants_courses"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.Participant"
+            android:label="@string/title_activity_participant"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.Course"
+            android:label="@string/title_activity_course"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.Content"
+            android:label="@string/title_activity_content"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.Send"
+            android:label="@string/title_activity_send"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.ParticipantList"
+            android:label="@string/title_activity_participant_list"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.ParticipantCourseList"
+            android:label="@string/title_activity_participant_couurse_list"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.ChoiceMenu"
+            android:label="@string/title_activity_choice_menu"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.Assignments"
+            android:label="@string/title_activity_assignments"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.AssignmentContent"
+            android:label="@string/title_activity_assignment_content"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <service
+            android:name="com.moodletest.TestService"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/service_name"
+            android:process=":my_process" >
+        </service>
+
+        <receiver android:name="com.moodletest.MyBroadcastReceiver" >
+        </receiver>
+
+        <activity
+            android:name="com.moodletest.AssignmentWebview"
+            android:label="@string/title_activity_assignment_webview"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.Files"
+            android:label="@string/title_activity_files"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.CourseContents"
+            android:label="@string/title_activity_course_contents"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.UrlList"
+            android:label="@string/title_activity_url_list"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.ForumsTopics"
+            android:label="@string/title_activity_forums_topics"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.ForumDiscussion"
+            android:label="@string/title_activity_forum_discussion"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.JsonTest"
+            android:label="@string/title_activity_json_test"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.moodletest.FileDownload"
+            android:label="@string/title_activity_file_download"
+            android:screenOrientation="portrait" >
+        </activity>
+    </application>
+
+</manifest>

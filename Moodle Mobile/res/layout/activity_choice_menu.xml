@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ChoiceMenu" >
+
+    <Button
+        android:id="@+id/course"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/course" />
+
+    <Button
+        android:id="@+id/assignments"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/course"
+        android:layout_below="@+id/course"
+        android:layout_marginTop="16dp"
+        android:text="@string/assignemtns" />
+
+    <Button
+        android:id="@+id/forums"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/assignments"
+        android:layout_alignRight="@+id/assignments"
+        android:layout_below="@+id/assignments"
+        android:layout_marginTop="16dp"
+        android:text="@string/forums" />
+
+    <Button
+        android:id="@+id/urlresources"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/forums"
+        android:layout_alignRight="@+id/forums"
+        android:layout_below="@+id/forums"
+        android:layout_marginTop="16dp"
+        android:text="@string/url_resources" />
+
+    <Button
+        android:id="@+id/files"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/urlresources"
+        android:layout_alignRight="@+id/urlresources"
+        android:layout_below="@+id/urlresources"
+        android:layout_marginTop="16dp"
+        android:text="@string/files" />
+
+    <Button
+        android:id="@+id/message"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/files"
+        android:layout_alignRight="@+id/files"
+        android:layout_below="@+id/files"
+        android:layout_marginTop="16dp"
+        android:text="@string/message" />
+
+</RelativeLayout>
