@@ -52,6 +52,10 @@ public class CourseContents extends Activity {
 		startdateText = (TextView)findViewById(R.id.startdate);
 		fullnameText = (TextView)findViewById(R.id.fullname);
 		shortnameText = (TextView)findViewById(R.id.shortname);
+		courseidText.setVisibility(View.GONE);
+		startdateText.setVisibility(View.GONE);
+		fullnameText.setVisibility(View.GONE);
+		shortnameText.setVisibility(View.GONE);
 		new NetworkHandler().execute();
 	}
 
@@ -140,6 +144,10 @@ public class CourseContents extends Activity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			bar.setVisibility(View.GONE);
+			courseidText.setVisibility(View.VISIBLE);
+			startdateText.setVisibility(View.VISIBLE);
+			fullnameText.setVisibility(View.VISIBLE);
+			shortnameText.setVisibility(View.VISIBLE);
 			fullnameText.setText("Course fullname : "+fullname);
 			shortnameText.setText("Course shortname :"+shortname);
 			courseidText.setText("Course id : "+courseid);

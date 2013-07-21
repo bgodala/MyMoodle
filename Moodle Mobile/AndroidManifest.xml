@@ -142,7 +142,8 @@
         <activity
             android:name="com.moodletest.FileDownload"
             android:label="@string/title_activity_file_download"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            >
         </activity>
     </application>
 

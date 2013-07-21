@@ -30,6 +30,8 @@ public final class R {
         public static final int lime600__04488=0x7f020006;
         public static final int moodle_icon=0x7f020007;
         public static final int test1=0x7f020008;
+        public static final int texture=0x7f020009;
+        public static final int texture_dark=0x7f02000a;
     }
     public static final class id {
         public static final int Button01=0x7f090015;
@@ -99,20 +101,22 @@ public final class R {
         public static final int activity_forums_topics=0x7f03000a;
         public static final int activity_json_test=0x7f03000b;
         public static final int activity_list=0x7f03000c;
-        public static final int activity_main=0x7f03000d;
-        public static final int activity_main_screen=0x7f03000e;
-        public static final int activity_participant=0x7f03000f;
-        public static final int activity_participant_couurse_list=0x7f030010;
-        public static final int activity_participant_list=0x7f030011;
-        public static final int activity_participants_courses=0x7f030012;
-        public static final int activity_progress=0x7f030013;
-        public static final int activity_send=0x7f030014;
-        public static final int activity_test=0x7f030015;
-        public static final int activity_url_list=0x7f030016;
-        public static final int activity_user_courses=0x7f030017;
-        public static final int activity_user_info=0x7f030018;
-        public static final int proxy_menu=0x7f030019;
-        public static final int settings_menu=0x7f03001a;
+        public static final int activity_load_url=0x7f03000d;
+        public static final int activity_main=0x7f03000e;
+        public static final int activity_main_screen=0x7f03000f;
+        public static final int activity_participant=0x7f030010;
+        public static final int activity_participant_couurse_list=0x7f030011;
+        public static final int activity_participant_list=0x7f030012;
+        public static final int activity_participants_courses=0x7f030013;
+        public static final int activity_progress=0x7f030014;
+        public static final int activity_send=0x7f030015;
+        public static final int activity_test=0x7f030016;
+        public static final int activity_url_list=0x7f030017;
+        public static final int activity_user_courses=0x7f030018;
+        public static final int activity_user_info=0x7f030019;
+        public static final int activity_web_view=0x7f03001a;
+        public static final int proxy_menu=0x7f03001b;
+        public static final int settings_menu=0x7f03001c;
     }
     public static final class menu {
         public static final int activity_content=0x7f080000;
@@ -133,15 +137,17 @@ public final class R {
         public static final int forums_topics=0x7f08000f;
         public static final int json_test=0x7f080010;
         public static final int list=0x7f080011;
-        public static final int main=0x7f080012;
-        public static final int main_screen=0x7f080013;
-        public static final int participant=0x7f080014;
-        public static final int participant_couurse_list=0x7f080015;
-        public static final int participant_list=0x7f080016;
-        public static final int participants_courses=0x7f080017;
-        public static final int test=0x7f080018;
-        public static final int url_list=0x7f080019;
-        public static final int user_info=0x7f08001a;
+        public static final int load_url=0x7f080012;
+        public static final int main=0x7f080013;
+        public static final int main_screen=0x7f080014;
+        public static final int participant=0x7f080015;
+        public static final int participant_couurse_list=0x7f080016;
+        public static final int participant_list=0x7f080017;
+        public static final int participants_courses=0x7f080018;
+        public static final int test=0x7f080019;
+        public static final int url_list=0x7f08001a;
+        public static final int user_info=0x7f08001b;
+        public static final int web_view=0x7f08001c;
     }
     public static final class raw {
         public static final int mykeystore=0x7f040000;

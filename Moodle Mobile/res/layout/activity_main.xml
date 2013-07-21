@@ -2,36 +2,46 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="center_horizontal"
-    android:orientation="vertical" 
-    android:layout_margin="5dp"
-    >
+    android:background="@drawable/texture"
+    android:orientation="vertical" >
 
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="match_parent"
         android:layout_height="268dp"
-        android:src="@drawable/download" />
+        android:src="@drawable/moodle_icon" />
 
     <EditText
         android:id="@+id/EditText01"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
-        android:hint="Username" />
+        android:hint="Username"
+        android:paddingLeft="10dp"
+        android:background="#78ffffff" />
 
     <EditText
         android:id="@+id/editText2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
+        android:layout_margin="5dp"
+        android:background="#78ffffff"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword"
-        android:hint="Password" />
+        android:paddingLeft="10dp" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/lime600__04488"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#009E60"
         android:text="Login" />
 
 </LinearLayout>
