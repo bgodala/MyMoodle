@@ -68,15 +68,15 @@
                 <Button
                     android:id="@+id/save"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.50"
                     android:text="Save"
-                    android:background="#009933" />
+                    android:background="#009E60" />
 
                 <Button
                     android:id="@+id/cancel"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.50"
                     android:text="Cancel" />
             </LinearLayout>

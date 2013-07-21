@@ -1,8 +1,8 @@
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/images"
+        android:background="@drawable/texture"
         android:gravity="left|top"
         android:orientation="vertical" >
 
@@ -12,10 +12,12 @@
             android:layout_height="124dp"
             android:layout_gravity="top|left"
             android:ems="10"
-            android:gravity="center_vertical|left"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
             android:lines="4" >
 
             <requestFocus />
+        
         </EditText>
 
         <Button
@@ -24,5 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Send" />
+
+
 
     </LinearLayout>

@@ -37,5 +37,6 @@
     <string name="title_activity_forum_discussion">ForumDiscussion</string>
     <string name="title_activity_json_test">JsonTest</string>
     <string name="title_activity_file_download">FileDownload</string>
+    <string name="title_activity_forum_list">ForumList</string>
 
 </resources>

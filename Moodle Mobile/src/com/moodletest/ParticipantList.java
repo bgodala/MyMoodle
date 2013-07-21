@@ -210,7 +210,8 @@ public class ParticipantList extends ListActivity {
 			}
 			bar.setVisibility(View.GONE);
 			//setListAdapter(new ArrayAdapter<String>(cont,R.layout.activity_participant_list,name));
-			listView.setAdapter(new ArrayAdapter<String>(cont,R.layout.activity_participant_list,name));
+			//listView.setAdapter(new ArrayAdapter<String>(cont,R.layout.activity_participant_list,name));
+			listView.setAdapter(new ContactListAdapter(cont,name));
 		}	
 	}
 	@Override

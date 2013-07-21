@@ -26,9 +26,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class ForumsTopics extends ListActivity {
+public class ForumList extends ListActivity {
 	
-	String username,password,token,courseid,id,url,name,userid,type,urlid;
+	String username,password,token,courseid,id,url,name,userid,type;
 
 	TextView assignment;
 	ConnHandler handler;
@@ -39,6 +39,7 @@ public class ForumsTopics extends ListActivity {
     Context cont;
     ListView listView;
     ProgressBar bar;
+    DBAdapter database;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,6 @@ public class ForumsTopics extends ListActivity {
 	    username=intent.getStringExtra("username");
 	    password=intent.getStringExtra("password");
 	    userid=intent.getStringExtra("userid");
-	    urlid=intent.getStringExtra("urlid");
 	    System.out.println(token+courseid+username+password+userid);
 	    
 	    new NetworkHandler().execute();
@@ -76,7 +76,7 @@ public class ForumsTopics extends ListActivity {
 	public void ConnHelper()
 	{
 		try {
-			HttpResponse resp = ConnHandler.doPost(MainActivity.ipaddr + "/webservice/rest/server.php?wstoken="+token,"wsfunction=mod_forum_get_forum_discussions&"+"forumids[0]="+urlid);
+			HttpResponse resp = ConnHandler.doPost(MainActivity.ipaddr + "/webservice/rest/server.php?wstoken="+token,"wsfunction=mod_forum_get_forums_by_courses&"+"courseids[0]="+courseid);
 			
 			HttpEntity enty = resp.getEntity();
     		strem= enty.getContent();
@@ -93,7 +93,7 @@ public class ForumsTopics extends ListActivity {
    	        	 if(eventType == XmlPullParser.START_TAG) {
    	        		//System.out.println("Entered while loop "+xpp.getName()+" "+xpp.getDepth()+" "+xpp.getAttributeCount()+" ");
    	        	  if(xpp.getDepth()==4 && xpp.getName().equals("KEY") && xpp.getAttributeCount()>0){
-   	        		System.out.println("Entered depth 4");
+   	        		//System.out.println("Entered depth 3");
    	        		  if(xpp.getAttributeValue(0).equals("id")){
    	        			xpp.next();
    	        			xpp.next();
@@ -137,14 +137,15 @@ public class ForumsTopics extends ListActivity {
         //intent1.putExtra("name", testName);
         //startActivity(intent1);
 		Intent intent1 = null;
-		intent1 = new Intent(this,AssignmentWebview.class);
-		
+		intent1 = new Intent(this,ForumsTopics.class);
+		System.out.println("forum id is "+idlist.get(position));
 		intent1.putExtra("urlid", idlist.get(position));
-		intent1.putExtra("url", MainActivity.ipaddr+"/mod/forum/discuss.php?d="+idlist.get(position));
+		intent1.putExtra("url", MainActivity.ipaddr+"/mod/forum/discuss.php?id="+idlist.get(position));
 		intent1.putExtra("courseid", courseid);
         intent1.putExtra("username", username);
         intent1.putExtra("password", password);
         intent1.putExtra("userid", userid);
+        intent1.putExtra("token", token);
 		startActivity(intent1);
 		
 		

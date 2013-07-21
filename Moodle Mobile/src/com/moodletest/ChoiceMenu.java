@@ -90,7 +90,7 @@ public class ChoiceMenu extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				sendMessage(Assignments.class, "forum");
+				sendMessage(ForumList.class, "forum");
 
 			}
 		});
