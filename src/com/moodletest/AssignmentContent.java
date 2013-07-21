@@ -18,16 +18,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.text.Html;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
 import android.webkit.WebView;
-import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -156,7 +153,7 @@ public class AssignmentContent extends Activity {
 			try {
 				response = httpclient2.execute(httpget);
 
-				int status = response.getStatusLine().getStatusCode();
+				//int status = response.getStatusLine().getStatusCode();
 				// System.out.println("status code is" +status);
 				// System.out.println(response.toString());
 				// System.out.println(response.getAllHeaders().toString());
