@@ -70,6 +70,7 @@ public class AssignmentContent extends Activity {
 		if (table_content) {
 			//assignment.setText(Html.fromHtml(database.assignTableGetContent(
 					//urlid, courseid, userid).getString(0)));
+			bar.setVisibility(ProgressBar.GONE);
 			webView.loadData(database.assignTableGetContent(
 					urlid, courseid, userid).getString(0), "text/html", "utf-8");
 		} else {
