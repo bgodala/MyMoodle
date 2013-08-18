@@ -21,15 +21,21 @@ import org.jsoup.select.Elements;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.Html;
 import android.view.Menu;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class ForumDiscussion extends Activity {
+public class ForumDiscussion extends ListActivity {
 
 	public String username, password, url, urlid, courseid, userid;
 	public TextView assignment;
@@ -38,12 +44,20 @@ public class ForumDiscussion extends Activity {
 	Elements heading, content;
 	Element head1;
 	org.jsoup.nodes.Document doc;
-	WebView webView;
+	//WebView webView;
+	ProgressBar bar;
+	String[] author,subject,post,date;
+	ListView listView;
+	Context cont=this;
+	Bitmap picuri[];
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_assignment_content);
+		setContentView(R.layout.activity_progress);
+		bar=(ProgressBar)findViewById(R.id.progressBar1);
+		listView = (ListView) findViewById(android.R.id.list);
+		bar.setVisibility(View.VISIBLE);
 		table_content = false;
 		//database = new DBAdapter(this);
 		//database.open();
@@ -54,9 +68,10 @@ public class ForumDiscussion extends Activity {
 		urlid = intent.getStringExtra("urlid");
 		courseid = intent.getStringExtra("courseid");
 		userid = intent.getStringExtra("userid");
+		
 		// username="bhargav";
 		// password="xmEnEvolution@!)*!((!21081991";
-		webView = (WebView) findViewById(R.id.assignment);
+		//webView = (WebView) findViewById(R.id.assignment);
 		//webView.getSettings().setJavaScriptEnabled(true);
 			new NetworkHandler().execute();
 		
@@ -104,8 +119,6 @@ public class ForumDiscussion extends Activity {
 			// s.setContentEncoding("UTF-8");
 			s.setContentType("application/x-www-form-urlencoded");
 
-			// request.setHeader("Content-Type",
-			// "application/x-www-form-urlencoded");
 			request.setEntity(s);
 			// request.addHeader("accept", "application/json");
 
@@ -117,23 +130,7 @@ public class ForumDiscussion extends Activity {
 			// "utf-8"));
 			HttpEntity respentity = resp3.getEntity();
 			System.out.println(convertStreamToString(respentity.getContent()));
-			Header header[] = resp3.getAllHeaders();
-			if (header != null) {
-				for (Header tempheader : header) {
-
-					// cookieManager.setCookie(ipaddr + "/login/index.php",
-					// tempheader.getValue());;
-					System.out.println("temp header is " + tempheader.getName()
-							+ " : " + tempheader.getValue());
-				}
-			}
-
 			HttpGet httpget = new HttpGet(url);
-			// Accept JSON
-
-			// httpget.addHeader("accept", "application/json");
-			// httpget.addHeader("Proxy-Authorization","Basic cHJha2FzaDppaXRo");
-			// Execute the request
 			HttpResponse response;
 			try {
 				response = httpclient2.execute(httpget);
@@ -143,9 +140,6 @@ public class ForumDiscussion extends Activity {
 				// System.out.println(response.toString());
 				// System.out.println(response.getAllHeaders().toString());
 				Header[] head = response.getAllHeaders();
-				for (int i = 0; i < head.length; i++) {
-					// System.out.println("header "+head[i].getName()+" : header value "+head[i].getValue()+" close ");
-				}
 				HttpEntity entity = response.getEntity();
 
 				InputStream instream = entity.getContent();
@@ -159,6 +153,33 @@ public class ForumDiscussion extends Activity {
 				// System.out.println(new
 				// org.jsoup.examples.HtmlToPlainText().getPlainText(contentdiv));
 				// System.out.println(result);
+				 content = doc.getElementsByClass("forumpost");
+				 author = new String[content.size()];
+				 subject = new String[content.size()];
+				 date  = new String[content.size()];
+				 post = new String[content.size()];
+				 picuri =new Bitmap[content.size()];
+				 
+				 for(int i=0;i<content.size();i++)
+				 { System.out.println("iteration is :"+i);
+				 //int i=0;
+					 
+					 String temp = content.get(i).select(".author").text();
+					 subject[i] = content.get(i).select(".subject").text();
+					 post[i]=content.get(i).select(".posting").text();
+					 String [] auth = temp.split("- ");
+					 author[i]= auth[0];
+					 date[i]=auth[1];
+					    /*try {
+					    	HttpEntity entity1= ConnHandler.doPost(content.get(i).select(".userpicture").get(0).absUrl("src")).getEntity();
+					        InputStream in = entity1.getContent();
+					        picuri[i]=BitmapFactory.decodeStream(in);
+					    } catch (Exception e) {
+					        //Log.e("Error", e.getMessage());
+					        e.printStackTrace();
+					    	System.out.println("error in url loading");
+					    }*/
+				 }
 			} catch (Exception e) {
 				e.printStackTrace();
 
@@ -190,11 +211,16 @@ public class ForumDiscussion extends Activity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			//content = doc.getElementsByClass("region-content");
-			content = doc.getElementsByAttributeValue("role","main");
+			//content = doc.getElementsByAttributeValue("role","main");
+
+			//String uri = test.get(0).absUrl("src");
+			//String uri = Jsoup.parse(test.toString()).absUrl("src");
 			// assignment.setText(Html.fromHtml(head1.toString()
 			// + content.toString()));
-			webView.loadData(content.toString(),
-					"text/html", "utf-8");
+			bar.setVisibility(View.GONE);
+			listView.setAdapter(new ForumListAdapter(cont, subject, picuri, author, date, post));
+			/*webView.loadData(uri,
+					"text/html", "utf-8");*/
 		}
 
 	}

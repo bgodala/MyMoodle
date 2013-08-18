@@ -7,11 +7,5 @@
     
 	<item android:id="@+id/proxy" android:orderInCategory="3" android:title="Proxy Settings" android:titleCondensed="Proxy">
 	</item>
-	    
-
-        <item android:id="@+id/menu_archive"
-              android:title="test 1" android:orderInCategory="4"/>
-        <item android:id="@+id/menu_delete"
-              android:title="test 2" android:orderInCategory="5"/>
 
 </menu>

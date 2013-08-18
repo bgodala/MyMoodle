@@ -26,10 +26,13 @@ import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpParams;
@@ -64,6 +67,7 @@ import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 import android.webkit.CookieManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +75,9 @@ import android.widget.Toast;
 @SuppressLint("ShowToast")
 public class MainActivity extends Activity {
 	public static final String PREFS_NAME = "MyPrefsFile";
+	public static String proxyUser,proxyPass,proxySer;
+	public static int proxyPort;
+	public static boolean proxyCheck,authCheck; 
 	String url;
 	String username = null, passwrd = null, fullname;
 	String token, userid;
@@ -104,10 +111,29 @@ public class MainActivity extends Activity {
 		sharepref = getSharedPreferences(PREFS_NAME, 0);
 		setTitle("My Moodle Application");
 		cont = this;
+		proxyUser=sharepref.getString("proxy_username", null);
+		proxyPass=sharepref.getString("proxy_password", null);
+		proxySer=sharepref.getString("proxy", null);
+		if(sharepref.getString("port", null)!=null)
+		{
+			proxyPort=Integer.parseInt(sharepref.getString("port", null));
+		}
+		if(sharepref.getString("proxyCheck", "false").equals("true"))
+		{
+			proxyCheck=true;
+		}else{
+			proxyCheck=false;
+		}
+		if(sharepref.getString("authCheck", "false").equals("true"))
+		{
+			authCheck=true;
+		}else{
+			authCheck=false;
+		}
 		username = sharepref.getString("username", null);
 		passwrd = sharepref.getString("password", null);
 		ipaddr = sharepref.getString("server",
-				"http://moodle.iith.ac.in/moodle");
+				"http://moodle.iith.ac.in");
 		webservice = sharepref.getString("service", "moodle_mobile");
 		System.out.println(webservice);
 		webserver.setText(ipaddr);
@@ -210,12 +236,17 @@ public class MainActivity extends Activity {
 
 	public static JSONObject doGet(String url) {
 		JSONObject json = null;
-		HttpClient httpclient = new DefaultHttpClient();
+		DefaultHttpClient httpclient = new DefaultHttpClient();
 		// Prepare a request object
+		HttpHost proxy = new HttpHost(proxySer, proxyPort);
+		//httpclient.getCredentialsProvider().setCredentials(new AuthScope(proxySer, proxyPort, AuthScope.ANY_REALM, "basic"),
+        //	    new UsernamePasswordCredentials("cs11b012", "xmEnEvolution"));
+        httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+        
 		HttpGet httpget = new HttpGet(url);
 		// Accept JSON
 		httpget.addHeader("accept", "application/json");
-		httpget.addHeader("Proxy-Authorization", "Basic cHJha2FzaDppaXRo");
+		//httpget.addHeader("Proxy-Authorization", "Basic cHJha2FzaDppaXRo");
 		// Execute the request
 		HttpResponse response;
 		try {
@@ -343,7 +374,7 @@ public class MainActivity extends Activity {
 
 	public void ConnHelper() {
 		try {
-			HttpResponse resp = doPost(MainActivity.ipaddr
+			HttpResponse resp = ConnHandler.doPost(MainActivity.ipaddr
 					+ "/webservice/rest/server.php?wstoken=" + token,
 					"wsfunction=core_webservice_get_site_info");
 
@@ -439,7 +470,7 @@ public class MainActivity extends Activity {
 						+ "&password="
 						+ URLEncoder.encode(password.toString(), "utf-8")
 						+ "&service=" + webservice;
-				JSONObject obj = doGet(url);
+				JSONObject obj = ConnHandler.doGet(url);
 				if (!obj.has("token")) {
 					System.out.println("in token verification");
 					runOnUiThread(new Runnable() {
@@ -499,10 +530,10 @@ public class MainActivity extends Activity {
 		// ImageView image = (ImageView) settings.findViewById(R.id.image);
 		// image.setImageResource(R.drawable.ic_launcher);
 
-		Button dialogButton = (Button) settings.findViewById(R.id.cancel);
+		Button cancelButton = (Button) settings.findViewById(R.id.cancel);
 		Button saveButton = (Button) settings.findViewById(R.id.save);
 		// if button is clicked, close the custom dialog
-		dialogButton.setOnClickListener(new View.OnClickListener() {
+		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				settings.dismiss();
@@ -533,7 +564,50 @@ public class MainActivity extends Activity {
 		final Dialog settings = new Dialog(this);
 		settings.setContentView(R.layout.proxy_menu);
 		settings.setTitle("Proxy Settings");
+		final CheckBox proxy_check = (CheckBox)settings.findViewById(R.id.proxy_check);
+		final CheckBox auth_check = (CheckBox)settings.findViewById(R.id.auth_check);
+		final EditText proxy =(EditText)settings.findViewById(R.id.proxy);
+		final EditText port =(EditText)settings.findViewById(R.id.port);
+		final EditText proxyUsername =(EditText)settings.findViewById(R.id.username);
+		final EditText proxyPassword =(EditText)settings.findViewById(R.id.password);
+		Button cancelButton = (Button) settings.findViewById(R.id.cancel);
+		Button saveButton = (Button) settings.findViewById(R.id.save);
+		cancelButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				settings.dismiss();
+			}
+		});
+		saveButton.setOnClickListener(new View.OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				SharedPreferences.Editor editor = sharepref.edit();
+				if(proxy_check.isChecked()){
+					editor.putString("proxyCheck","true");
+					proxyCheck=true;
+					editor.putString("proxy", proxy.getText().toString());
+					proxySer=proxy.getText().toString();
+					editor.putString("port", port.getText().toString());
+					proxyPort=Integer.parseInt(port.getText().toString());
+				}
+				if(auth_check.isChecked())
+				{
+					editor.putString("authCheck","true");
+					authCheck=true;
+					editor.putString("proxy_usernmae", proxyUsername.getText().toString());
+					proxyUser=proxyUsername.getText().toString();
+					editor.putString("proxy_password", proxyPassword.getText().toString());
+					proxyPass=proxyPassword.getText().toString();
+				}
+				
+				editor.commit();
+				settings.dismiss();
+
+			}
+		});
 		/*
 		 * // set the custom dialog components - text, image and button TextView
 		 * server = (TextView) settings.findViewById(R.id.server);
@@ -566,6 +640,18 @@ public class MainActivity extends Activity {
 		 * 
 		 * } });
 		 */
+		if(proxyCheck)
+		{
+			proxy_check.setChecked(true);
+			proxy.setText(proxySer);
+			port.setText(Integer.valueOf(proxyPort).toString());
+		}
+		if(authCheck)
+		{
+			auth_check.setChecked(true);
+			proxyUsername.setText(proxyUser);
+			proxyPassword.setText(Integer.valueOf(proxyPass).toString());
+		}
 		settings.show();
 	}
 

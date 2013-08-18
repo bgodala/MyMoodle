@@ -137,7 +137,7 @@ public class ForumsTopics extends ListActivity {
         //intent1.putExtra("name", testName);
         //startActivity(intent1);
 		Intent intent1 = null;
-		intent1 = new Intent(this,AssignmentWebview.class);
+		intent1 = new Intent(this,ForumDiscussion.class);
 		
 		intent1.putExtra("urlid", idlist.get(position));
 		intent1.putExtra("url", MainActivity.ipaddr+"/mod/forum/discuss.php?d="+idlist.get(position));

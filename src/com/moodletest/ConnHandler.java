@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.security.Principal;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,13 +17,24 @@ import javax.xml.xpath.XPathFactory;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.AuthenticationException;
+import org.apache.http.auth.Credentials;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.auth.params.AuthPNames;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHttpRequest;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -32,12 +44,25 @@ import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import com.google.api.client.http.BasicAuthentication;
+
 public class ConnHandler {
 	
 	public static Client test = new Client();
 	public static JSONObject doGet(String url) {
 	    JSONObject json = null;
-	    HttpClient httpclient = new DefaultHttpClient();
+	    DefaultHttpClient httpclient = new DefaultHttpClient();
+        if(MainActivity.proxyCheck==true)
+        {
+        	HttpHost proxy = new HttpHost(MainActivity.proxySer, MainActivity.proxyPort);
+        	if(MainActivity.authCheck==true){
+        		httpclient.getCredentialsProvider().setCredentials(new AuthScope(MainActivity.proxySer, MainActivity.proxyPort, AuthScope.ANY_REALM, "basic"),
+                	    new UsernamePasswordCredentials(MainActivity.proxyUser, MainActivity.proxyPass));
+                
+                
+        	}
+        	httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+        }
 	    // Prepare a request object
 	    HttpGet httpget = new HttpGet(url);
 	    // Accept JSON
@@ -103,8 +128,22 @@ public class ConnHandler {
 }
 	public static HttpResponse doPost(String url, String c) throws ClientProtocolException, IOException 
     {
-        HttpClient httpclient = test.httpClient;
-		//HttpClient httpclient = new DefaultHttpClient();
+        DefaultHttpClient httpclient = test.httpClient;
+        if(MainActivity.proxyCheck==true)
+        {
+        	HttpHost proxy = new HttpHost(MainActivity.proxySer, MainActivity.proxyPort);
+        	if(MainActivity.authCheck==true){
+        		httpclient.getCredentialsProvider().setCredentials(new AuthScope(MainActivity.proxySer, MainActivity.proxyPort, AuthScope.ANY_REALM, "basic"),
+                	    new UsernamePasswordCredentials(MainActivity.proxyUser, MainActivity.proxyPass));
+                
+                
+        	}
+        	httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+        }
+        //HttpHost target = new HttpHost("10.0.0.5",80);
+        //HttpHost host = new HttpHost("10.0.0.5",80);
+		//AuthCache authCache = new BasicAuthCache();
+        //HttpClient httpclient = new DefaultHttpClient();
 		HttpPost request = new HttpPost(url);
         StringEntity s = new StringEntity(c);
         System.out.println(s.getContent());
@@ -113,7 +152,47 @@ public class ConnHandler {
         s.setContentType("application/x-www-form-urlencoded");
         //request.setHeader("Content-Type", "application/x-www-form-urlencoded");
         request.setEntity(s);
+        //httpclient.getCredentialsProvider().setCredentials(new AuthScope("10.0.0.5", 80, AuthScope.ANY_REALM, "basic"),
+        //	    new UsernamePasswordCredentials("cs11b012", "xmEnEvolution"));
+		/*try {
+			request.addHeader(new BasicScheme().authenticate(new UsernamePasswordCredentials("cs11b012", "xmEnEvolution"),new BasicHttpRequest(request.getRequestLine())));
+		} catch (AuthenticationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
         //request.addHeader("accept", "application/json");
+        Header header[]=request.getAllHeaders();
+		for(int i=0;i<header.length;i++)
+			System.out.println("request header is "+header[i].getName()+" : "+header[i].getValue());
+        
+
+        return httpclient.execute(request);
+}
+	public static HttpResponse doPost(String url) throws ClientProtocolException, IOException 
+    {
+        DefaultHttpClient httpclient = test.httpClient;
+        if(MainActivity.proxyCheck==true)
+        {
+        	HttpHost proxy = new HttpHost(MainActivity.proxySer, MainActivity.proxyPort);
+        	if(MainActivity.authCheck==true){
+        		httpclient.getCredentialsProvider().setCredentials(new AuthScope(MainActivity.proxySer, MainActivity.proxyPort, AuthScope.ANY_REALM, "basic"),
+                	    new UsernamePasswordCredentials(MainActivity.proxyUser, MainActivity.proxyPass));
+                
+                
+        	}
+        	httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+        }
+        
+		//HttpClient httpclient = new DefaultHttpClient();
+        HttpContext context = new BasicHttpContext();
+		HttpPost request = new HttpPost(url);
+		
+        //s.setContentEncoding("UTF-8");
+        //request.addHeader("accept", "application/json");
+
+		Header header[]=request.getAllHeaders();
+		for(int i=0;i<header.length;i++)
+			System.out.println("request header is "+header[i].getName()+" : "+header[i].getValue());
         
 
         return httpclient.execute(request);

@@ -14,37 +14,27 @@
             android:orientation="vertical" >
 
             <CheckBox
-                android:id="@+id/CheckBox01"
+                android:id="@+id/proxy_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Use Proxy Settings" />
 
-            <TextView
-                android:id="@+id/TextView02"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Proxy" />
-
             <EditText
-                android:id="@+id/EditText02"
+                android:id="@+id/proxy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10" >
+                android:ems="10"
+                android:hint="Proxy Host IP" >
 
                 <requestFocus />
             </EditText>
 
-            <TextView
-                android:id="@+id/TextView01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Port" />
-
             <EditText
-                android:id="@+id/EditText01"
+                android:id="@+id/port"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10" >
+                android:ems="10"
+                android:hint="Proxy Port" >
                 <requestFocus />
             </EditText>
         </LinearLayout>
@@ -55,42 +45,54 @@
             android:orientation="vertical" >
 
             <CheckBox
-                android:id="@+id/checkBox1"
+                android:id="@+id/auth_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Use Basic Authentication" />
 
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Username" />
-
             <EditText
-                android:id="@+id/editText1"
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10" >
+                android:ems="10"
+                android:hint="Username" >
                 <requestFocus />
             </EditText>
-                
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Password" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10" >
+                android:ems="10"
+                android:hint="Password" >
 
                 <requestFocus />
             </EditText>
+
+
 
         </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <Button
+                            android:id="@+id/save"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.50"
+                            android:text="Save"
+                            android:background="#009E60" />
+
+                        <Button
+                            android:id="@+id/cancel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.46"
+                            android:text="Cancel"
+                            android:background="#DC143C" />
+                    </LinearLayout>
 
     </LinearLayout>
     
